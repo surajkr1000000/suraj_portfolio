@@ -177,8 +177,13 @@ def build_nav():
 <nav>
     <div class="nav-container">
         <a href="#home" class="logo">{name}</a>
-        <span class="nav-toggle"><i class="fas fa-bars"></i></span>
-        <ul>
+        <!-- Hamburger -->
+        <div class="nav-toggle" id="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
         {links_html}
         </ul>
     </div>
@@ -386,6 +391,23 @@ def build_scripts():
         });
     }, { threshold: 0.1 });
     sections.forEach(sec => observer.observe(sec));
+
+    // mobile nav toggle logic
+    const toggle = document.getElementById("nav-toggle");
+    const menu = document.getElementById("nav-menu");
+
+    toggle.addEventListener("click", () => {
+    toggle.classList.toggle("active");
+    menu.classList.toggle("active");
+    });
+
+    // Optional: Close menu when link clicked
+    document.querySelectorAll("#nav-menu a").forEach(link => {
+    link.addEventListener("click", () => {
+      toggle.classList.remove("active");
+      menu.classList.remove("active");
+        });
+    });
 </script>
 """
 def generate_html():

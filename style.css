@@ -32,11 +32,11 @@ body {
 nav {
     width: 100%;
     background: var(--color-nav-bg);
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(8px);
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
 nav .nav-container {
@@ -45,9 +45,10 @@ nav .nav-container {
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 1rem;
 }
 
+/* Logo */
 nav .logo {
     font-weight: 700;
     font-size: 1.25rem;
@@ -55,6 +56,7 @@ nav .logo {
     text-decoration: none;
 }
 
+/* Desktop Menu */
 nav ul {
     display: flex;
     gap: 2rem;
@@ -65,57 +67,69 @@ nav a {
     color: var(--color-text);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
 }
 
 nav a:hover {
     color: var(--color-primary-dark);
 }
 
-/* mobile hamburger */
-nav .nav-toggle {
+/* HAMBURGER */
+.nav-toggle {
     display: none;
-    font-size: 1.5rem;
+    flex-direction: column;
     cursor: pointer;
+    gap: 5px;
 }
 
+.nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--color-text);
+    transition: all 0.3s ease;
+}
+
+/* Animate into X */
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* MOBILE */
 @media (max-width: 768px) {
-    nav ul {
-        position: absolute;
-        top: 60px;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        background: var(--color-nav-bg);
-        padding: 1rem 0;
-        gap: 1rem;
-        display: none;
-    }
-    nav ul.open {
+
+    .nav-toggle {
         display: flex;
     }
-    nav .nav-toggle {
-        display: block;
+
+    nav ul {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: var(--color-nav-bg);
+        overflow: hidden;
+
+        max-height: 0;
+        transition: max-height 0.4s ease;
     }
-}
 
-nav ul {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    list-style: none;
-    padding: 1rem 0;
-}
+    nav ul li {
+        text-align: center;
+        padding: 1rem 0;
+    }
 
-nav a {
-    color: #111;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-}
-
-nav a:hover {
-    color: #3b82f6;
+    nav ul.active {
+        max-height: 500px;
+    }
 }
 
 /* HERO SECTION */
